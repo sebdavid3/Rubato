@@ -1,26 +1,442 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@400;500;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: 102, 0, 102; /* #660066 - púrpura Rubato principal del manual */
+  --color-secondary: 212, 175, 55; /* dorado */
+  --color-accent: 204, 0, 204; /* magenta del degradado */
+  --color-bg-light: 249, 240, 249; /* fondo general morado muy claro */
+  --color-bg-section: 244, 220, 244; /* fondo secciones morado claro */
+  --color-bg-card: 252, 240, 252; /* fondo tarjetas */
+  --color-bg-dark: 36, 15, 36; /* #240f24 - fondo oscuro principal */
+  --color-bg-dark-section: 75, 32, 75; /* #4b204b - fondo secciones oscuras */
+  --color-text-light: 255, 255, 255; /* texto blanco */
+  --color-text-dark: 51, 51, 51; /* texto oscuro */
+  --color-morado-claro: 206, 141, 206; /* #ce8dce - morado claro para textos secundarios */
+  --color-gold: 212, 175, 55; /* dorado elegante */
+  --color-gold-hover: 255, 215, 80; /* dorado más claro para hover */
+  --font-cinzel: 'Cinzel', serif;
+  --font-montserrat: 'Montserrat', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cinzel), serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Nueva animación para el carrusel de artistas */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateX(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Animación de entrada con delay */
+.animate-fadeInSlide {
+  animation: fadeInSlide 0.6s ease-out forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Form styles específicos para mantener el diseño oscuro */
+.form-contacto {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-contacto label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.form-contacto input,
+.form-contacto textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgb(var(--color-bg-dark-section));
+  border-radius: 0.375rem;
+  background-color: rgb(var(--color-bg-dark));
+  color: rgb(var(--color-text-light));
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-contacto input::placeholder,
+.form-contacto textarea::placeholder {
+  color: rgb(156, 163, 175); /* gray-400 */
+}
+
+.form-contacto input:focus,
+.form-contacto textarea:focus {
+  outline: none;
+  border-color: rgb(var(--color-accent));
+  box-shadow: 0 0 0 2px rgba(var(--color-accent), 0.2);
+}
+
+.form-contacto button {
+  padding: 0.75rem 1.5rem;
+  background-color: rgb(var(--color-accent));
+  color: rgb(var(--color-text-light));
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.form-contacto button:hover {
+  background-color: rgb(var(--color-primary));
+}
+
+/* Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Smooth transitions */
+a, button {
+  transition: all 0.2s ease;
+}
+
+/* Dark theme adjustments */
+.bg-bgDark {
+  background-color: rgb(var(--color-bg-dark));
+}
+
+.bg-bgDarkSection {
+  background-color: rgb(var(--color-bg-dark-section));
+}
+
+.text-textLight {
+  color: rgb(var(--color-text-light));
+}
+
+.text-moradoClaro {
+  color: rgb(var(--color-morado-claro));
+}
+
+.text-gold {
+  color: rgb(var(--color-gold));
+}
+
+/* Scrollbar personalizada para carrusel horizontal */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, and Opera */
+}
+
+/* Smooth scrolling para el carrusel */
+.carousel-container {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Efecto de gradiente mejorado para bordes del carrusel */
+.carousel-gradient-left {
+  background: linear-gradient(to right, rgb(var(--color-bg-dark)) 0%, rgba(var(--color-bg-dark), 0.8) 50%, transparent 100%);
+}
+
+.carousel-gradient-right {
+  background: linear-gradient(to left, rgb(var(--color-bg-dark)) 0%, rgba(var(--color-bg-dark), 0.8) 50%, transparent 100%);
+}
+
+/* Botones de navegación del carrusel */
+.carousel-nav-button {
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(var(--color-accent), 0.3);
+}
+
+.carousel-nav-button:hover {
+  background-color: rgb(var(--color-accent));
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(var(--color-accent), 0.4);
+}
+
+/* Indicadores de progreso del carrusel */
+.carousel-indicator {
+  transition: all 0.3s ease;
+}
+
+.carousel-indicator.active {
+  background-color: rgb(var(--color-accent));
+  transform: scale(1.2);
+}
+
+/* Tarjetas de artistas mejoradas */
+.artist-card {
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.artist-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(var(--color-accent), 0.2);
+}
+
+/* Efecto de overlay mejorado */
+.artist-overlay {
+  background: linear-gradient(135deg, rgba(var(--color-primary), 0.8) 0%, rgba(var(--color-accent), 0.6) 100%);
+}
+
+/* Efecto de resplandor en hover */
+.glow-on-hover {
+  transition: all 0.3s ease;
+}
+
+.glow-on-hover:hover {
+  box-shadow: 0 0 20px rgba(var(--color-accent), 0.6), 0 0 40px rgba(var(--color-accent), 0.4);
+}
+
+/* Estilos para ocultar la barra de scroll del carrusel */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Estilos para mejorar la accesibilidad móvil */
+
+/* Asegurar áreas de toque mínimas según WCAG */
+@media (max-width: 768px) {
+  button, a[role="button"], input[type="submit"], input[type="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+  }
+
+  /* Mejorar el contraste en móviles */
+  .text-textSecondary {
+    color: rgb(200, 200, 200);
+  }
+
+  /* Espaciado mejorado para móviles */
+  .container {
+    padding: 0 1rem;
+  }
+
+  /* Navegación móvil accesible */
+  nav a, nav button {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    font-size: 16px; /* Evitar zoom en iOS */
+  }
+
+  /* Formularios móviles */
+  input, textarea, select {
+    font-size: 16px; /* Evitar zoom en iOS */
+    min-height: 44px;
+  }
+
+  /* Scroll suave mejorado para móviles */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Mejorar la legibilidad en pantallas pequeñas */
+  h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: clamp(1.125rem, 3.5vw, 1.5rem);
+    line-height: 1.4;
+  }
+
+  p {
+    font-size: clamp(0.875rem, 3vw, 1rem);
+    line-height: 1.6;
+  }
+
+  /* Espaciado vertical responsivo */
+  .section-padding {
+    padding-top: clamp(2rem, 8vw, 4rem);
+    padding-bottom: clamp(2rem, 8vw, 4rem);
+  }
+}
+
+/* Mejoras de accesibilidad general */
+:focus-visible {
+  outline: 2px solid rgb(var(--color-accent));
+  outline-offset: 2px;
+}
+
+/* Remove outline for mouse users but keep for keyboard users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Mejorar el contraste para usuarios con baja visión */
+@media (prefers-contrast: high) {
+  .text-textSecondary {
+    color: rgb(220, 220, 220);
+  }
+  
+  .bg-bgDarkSection {
+    background-color: rgb(60, 40, 60);
+  }
+}
+
+/* Reducir animaciones para usuarios que prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Utilidades adicionales para responsive design */
+.responsive-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+@media (max-width: 640px) {
+  .responsive-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Mejoras para scroll horizontal en móviles */
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.horizontal-scroll > * {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* Header móvil - optimización del logo y título */
+@media (max-width: 640px) {
+  /* Asegurar que el texto del logo se mantenga legible en pantallas pequeñas */
+  .header-logo-text {
+    font-size: 0.75rem; /* 12px */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+    line-height: 1.1;
+  }
+  
+  /* En pantallas muy pequeñas (menos de 320px), reducir aún más */
+  @media (max-width: 320px) {
+    .header-logo-text {
+      font-size: 0.7rem; /* 11px */
+      max-width: 100px;
+    }
+  }
+}
+
+/* Mejoras específicas para el header en dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+  /* Dispositivos táctiles */
+  .header-logo-link {
+    /* Asegurar área de toque mínima pero sin ser demasiado grande */
+    min-height: 44px;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+  
+  .header-menu-button {
+    /* Área de toque óptima para el botón de menú */
+    min-width: 48px;
+    min-height: 48px;
+    padding: 8px;
+  }
+}
+
+/* Evitar conflictos entre el logo clickeable y el botón de menú */
+.header-container {
+  /* Asegurar espacio suficiente entre elementos */
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .header-container {
+    gap: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
