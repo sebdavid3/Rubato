@@ -1,12 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Metadata } from "next";
-
-// export const metadata: Metadata = {
-//   title: "Fundación Rubato | Apóyanos",
-//   description: "Tu apoyo transforma vidas a través de la música. Conoce cómo puedes contribuir a nuestra misión de formar jóvenes talentos musicales.",
-// };
+import Image from "next/image";
 
 // Componente para tarjeta de método de donación
 const DonationMethodCard: React.FC<{
@@ -162,11 +157,12 @@ const ImpactSection: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="relative">
-              <img 
+            <div className="relative h-64">
+              <Image 
                 src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=600&h=400&fit=crop"
                 alt="Estudiantes en clase de música"
-                className="w-full rounded-xl shadow-lg"
+                fill
+                className="object-cover w-full rounded-xl shadow-lg"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-xl"></div>
             </div>
@@ -227,9 +223,10 @@ export default function Apoyanos() {
     <main className="bg-bgDark min-h-screen">
       {/* Hero Section */}
       <section className="relative w-full h-[60vh] md:h-[70vh] flex items-center justify-center">
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&h=800&fit=crop"
           alt="Orquesta juvenil en concierto"
+          fill
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/60"></div>
@@ -359,11 +356,12 @@ export default function Apoyanos() {
                 </svg>
               </a>
             </div>
-            <div className="relative">
-              <img 
+            <div className="relative h-96">
+              <Image 
                 src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&h=600&fit=crop"
                 alt="Voluntarios apoyando evento musical"
-                className="w-full rounded-xl shadow-lg"
+                fill
+                className="object-cover w-full rounded-xl shadow-lg"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-xl"></div>
             </div>

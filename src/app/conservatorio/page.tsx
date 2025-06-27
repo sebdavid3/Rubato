@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Conservatorio() {
   const [expandedEnfasis, setExpandedEnfasis] = useState<number | null>(null);
@@ -332,10 +334,12 @@ export default function Conservatorio() {
               <div key={index} className="bg-bgDarkSection rounded-xl shadow-lg overflow-hidden">
                 <div className="flex flex-col lg:flex-row">
                   <div className="lg:w-1/3">
-                    <img 
+                    <Image 
                       src={modulo.imagen} 
                       alt={modulo.titulo}
                       className="w-full h-64 lg:h-full object-cover"
+                      width={600}
+                      height={400}
                     />
                   </div>
                   <div className="lg:w-2/3 p-8">
@@ -513,12 +517,12 @@ export default function Conservatorio() {
             >
               Formulario de Inscripción
             </a>
-            <a 
+            <Link 
               href="/contacto" 
               className="bg-transparent border-2 border-accent text-accent font-bold py-4 px-8 rounded-lg hover:bg-accent hover:text-textLight transition-colors font-montserrat text-lg"
             >
               Más Información
-            </a>
+            </Link>
           </div>
         </section>
 

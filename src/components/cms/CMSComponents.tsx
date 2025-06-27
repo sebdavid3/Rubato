@@ -2,6 +2,7 @@
 // Estos componentes manejan estados de carga, errores y contenido dinámico
 
 import React from 'react';
+import Image from 'next/image';
 
 // Componente de loading genérico
 export interface LoadingSpinnerProps {
@@ -226,21 +227,23 @@ export const CMSImage: React.FC<CMSImageProps> = ({
 }) => {
   if (!image) {
     return (
-      <img
+      <Image
         src={fallbackSrc}
         alt="Imagen no disponible"
         className={className}
         sizes={sizes}
+        width={500}
+        height={300}
       />
     );
   }
 
   return (
-    <img
+    <Image
       src={image.url}
       alt={image.alt}
-      width={image.width}
-      height={image.height}
+      width={image.width || 500}
+      height={image.height || 300}
       className={className}
       sizes={sizes}
     />

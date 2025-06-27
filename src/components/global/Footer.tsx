@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 interface FooterProps {
@@ -62,12 +63,12 @@ const Footer: React.FC<FooterProps> = ({ infoContacto, socialLinks }) => (
           <ul className="space-y-2">
             {enlacesRapidos.map((enlace, idx) => (
               <li key={idx}>
-                <a 
-                  href={enlace.url} 
+                <Link
+                  href={enlace.url}
                   className="hover:text-primary transition-colors font-montserrat text-sm text-textSecondary"
                 >
                   {enlace.nombre}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -79,12 +80,12 @@ const Footer: React.FC<FooterProps> = ({ infoContacto, socialLinks }) => (
           <ul className="space-y-2">
             {programas.map((prog, idx) => (
               <li key={idx}>
-                <a 
-                  href={prog.url} 
+                <Link
+                  href={prog.url}
                   className="hover:text-primary transition-colors font-montserrat text-sm text-textSecondary"
                 >
                   {prog.nombre}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { riomarQuartet } from '../../data/agrupaciones';
+import Image from 'next/image';
 
 export default function RioMarQuartetPage() {
   const agrupacion = riomarQuartet;
@@ -44,11 +45,13 @@ export default function RioMarQuartetPage() {
                 </p>
               )}
             </div>
-            <div className="relative">
-              <img 
-                src={agrupacion.imagenGrupo} 
+            <div className="relative w-full h-96">
+              <Image
+                src={agrupacion.imagenGrupo}
                 alt={agrupacion.nombre}
-                className="w-full rounded-xl shadow-2xl"
+                fill
+                style={{objectFit: "cover"}}
+                className="rounded-xl shadow-2xl"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-xl"></div>
             </div>
@@ -74,11 +77,15 @@ export default function RioMarQuartetPage() {
               .sort((a, b) => a.orden - b.orden)
               .map((integrante, index) => (
                 <div key={integrante.id} className="bg-bgDark rounded-xl p-6 text-center shadow-lg">
-                  <img 
-                    src={integrante.foto} 
-                    alt={integrante.nombre}
-                    className="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-accent/20"
-                  />
+                  <div className="relative w-32 h-32 mx-auto mb-6">
+                    <Image
+                      src={integrante.foto}
+                      alt={integrante.nombre}
+                      fill
+                      style={{objectFit: "cover"}}
+                      className="rounded-full border-4 border-accent/20"
+                    />
+                  </div>
                   <h3 className="text-xl font-bold text-textLight font-cinzel mb-2">
                     {integrante.nombre}
                   </h3>
@@ -88,6 +95,29 @@ export default function RioMarQuartetPage() {
                 </div>
               ))}
           </div>
+        </div>
+      </section>
+
+      {/* Repertorio */}
+      <section className="py-16 md:py-20">
+        <div className="container mx-auto px-8 md:px-16 max-w-4xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-textLight font-cinzel uppercase mb-4">
+              Repertorio Destacado
+            </h2>
+            <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
+            <p className="text-textSecondary text-lg font-montserrat max-w-3xl mx-auto">
+              Una selección de nuestro repertorio que abarca desde lo clásico hasta lo contemporáneo.
+            </p>
+          </div>
+          <ul className="grid md:grid-cols-2 gap-x-12 gap-y-6 text-textLight font-montserrat">
+            {agrupacion.repertorio.map((obra, index) => (
+              <li key={index} className="border-b border-gray-700/50 pb-3 flex flex-col">
+                <span className="font-bold">{obra.categoria}</span>
+                <span className="text-textSecondary">{obra.descripcion}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

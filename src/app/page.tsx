@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import ImageGallery from "../components/ui/ImageGallery";
 import EventGrid from "../components/events/EventGrid";
 import { eventos } from "../data/eventos";
@@ -61,18 +63,18 @@ const ContactCallToAction = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-            <a 
+            <Link
               href="/contacto"
               className="bg-accent text-textLight font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg hover:bg-primary transition-colors font-montserrat text-base sm:text-lg"
             >
               Formulario de Contacto
-            </a>
-            <a 
+            </Link>
+            <Link
               href="/conservatorio"
               className="bg-transparent border-2 border-accent text-accent font-bold py-4 px-8 rounded-lg hover:bg-accent hover:text-textLight transition-colors font-montserrat text-lg"
             >
               Conocer Programas
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -205,18 +207,21 @@ export default function Home() {
     <main className="bg-bgDark min-h-screen">
       {/* Hero Section responsivo */}
       <section className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] flex items-center justify-center">
-        <img
+        <Image
           src="/images/galeria/anita.jpg"
           alt="Anita violinista"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          fill
+          style={{objectFit: "cover", objectPosition: "center"}}
         />
         <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center mb-6 sm:mb-8">
-            <img
+            <Image
               src="/images/galeria/logo_blanco_completo.png"
               alt="Logo Fundación Rubato"
-              className="h-32 sm:h-40 md:h-48 lg:h-56 xl:h-64 filter drop-shadow-2xl"
+              width={256}
+              height={256}
+              className="h-32 sm:h-40 md:h-48 lg:h-56 xl:h-64 w-auto filter drop-shadow-2xl"
             />
           </div>
           <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-montserrat max-w-3xl mx-auto font-medium">
@@ -245,11 +250,13 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {programas.map((programa, index) => (
               <div key={index} className="bg-bgDarkSection rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={programa.imagen} 
+                <div className="relative overflow-hidden h-40 sm:h-48">
+                  <Image
+                    src={programa.imagen}
                     alt={programa.titulo}
-                    className="w-full h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    fill
+                    style={{objectFit: "cover"}}
+                    className="group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
@@ -260,7 +267,7 @@ export default function Home() {
                   <p className="text-textLight font-montserrat mb-4 leading-relaxed text-sm sm:text-base">
                     {programa.descripcion}
                   </p>
-                  <a 
+                  <Link
                     href={programa.url}
                     className="inline-flex items-center gap-2 text-accent hover:text-primary transition-colors font-montserrat font-medium text-sm sm:text-base"
                   >
@@ -268,7 +275,7 @@ export default function Home() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -290,11 +297,13 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {accesosPrincipales.map((acceso, index) => (
               <div key={index} className="bg-bgDarkSection rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={acceso.imagen} 
+                <div className="relative overflow-hidden h-40 sm:h-48">
+                  <Image
+                    src={acceso.imagen}
                     alt={acceso.titulo}
-                    className="w-full h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    fill
+                    style={{objectFit: "cover"}}
+                    className="group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
@@ -305,7 +314,7 @@ export default function Home() {
                   <p className="text-textLight font-montserrat mb-4 leading-relaxed text-sm sm:text-base">
                     {acceso.descripcion}
                   </p>
-                  <a 
+                  <Link
                     href={acceso.url}
                     className="inline-flex items-center gap-2 text-accent hover:text-primary transition-colors font-montserrat font-medium text-sm sm:text-base"
                   >
@@ -313,7 +322,7 @@ export default function Home() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -336,11 +345,13 @@ export default function Home() {
           <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {contenidoDestacado.map((item, index) => (
               <div key={index} className="bg-bgDarkSection rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={item.imagen} 
+                <div className="relative overflow-hidden h-48">
+                  <Image
+                    src={item.imagen}
                     alt={item.titulo}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    fill
+                    style={{objectFit: "cover"}}
+                    className="group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="absolute top-4 left-4">
@@ -373,7 +384,7 @@ export default function Home() {
                   <p className="text-textLight font-montserrat text-sm mb-4 line-clamp-2">
                     {item.descripcionCorta}
                   </p>
-                  <a 
+                  <Link
                     href={item.urlDetalle}
                     className="inline-flex items-center gap-2 text-accent hover:text-primary transition-colors font-montserrat font-medium text-sm"
                   >
@@ -381,7 +392,7 @@ export default function Home() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -402,11 +413,13 @@ export default function Home() {
             <div className="flex gap-4 min-w-max px-4">
               {contenidoDestacado.map((item, index) => (
                 <div key={index} className="bg-bgDarkSection rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 w-72 flex-shrink-0">
-                  <div className="relative overflow-hidden">
-                    <img 
-                      src={item.imagen} 
+                  <div className="relative overflow-hidden h-40">
+                    <Image
+                      src={item.imagen}
                       alt={item.titulo}
-                      className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
+                      fill
+                      style={{objectFit: "cover"}}
+                      className="group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="absolute top-3 left-3">
@@ -439,7 +452,7 @@ export default function Home() {
                     <p className="text-textLight font-montserrat text-xs mb-3 line-clamp-2">
                       {item.descripcionCorta}
                     </p>
-                    <a 
+                    <Link
                       href={item.urlDetalle}
                       className="inline-flex items-center gap-1 text-accent hover:text-primary transition-colors font-montserrat font-medium text-xs"
                     >
@@ -447,7 +460,7 @@ export default function Home() {
                       <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               ))}

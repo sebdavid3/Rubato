@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import Link from "next/link";
 
 export default function CursosLibres() {
   // Instrumentos disponibles organizados por categorías
@@ -284,12 +285,12 @@ export default function CursosLibres() {
             >
               Formulario de Inscripción
             </a>
-            <a 
+            <Link 
               href="/contacto" 
               className="bg-transparent border-2 border-accent text-accent font-bold py-4 px-8 rounded-lg hover:bg-accent hover:text-textLight transition-colors font-montserrat text-lg"
             >
               Más Información
-            </a>
+            </Link>
           </div>
         </section>
 

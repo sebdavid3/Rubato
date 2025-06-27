@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 interface ImageItem {
   url: string;
@@ -42,12 +43,13 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ imagenes }) => {
           {imagenes.map((img, idx) => (
             <div
               key={idx}
-              className={`${getSizeClasses(img.size)} overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group`}
+              className={`${getSizeClasses(img.size)} overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group relative`}
             >
-              <img
+              <Image
                 src={img.url}
                 alt={img.alt}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
               />
             </div>

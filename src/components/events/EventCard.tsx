@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export interface EventCardProps {
   titulo: string;
@@ -27,11 +28,13 @@ const EventCard: React.FC<EventCardProps> = ({
   return (
     <Link href={urlDetalle} className="block group">
       <div className="rounded-xl overflow-hidden shadow-lg bg-bgDarkSection hover:shadow-xl transition-all duration-300 hover:scale-105">
-        <div className="relative">
-          <img 
-            src={imagen} 
-            alt={titulo} 
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" 
+        <div className="relative h-48">
+          <Image
+            src={imagen}
+            alt={titulo}
+            fill
+            style={{objectFit: "cover"}}
+            className="group-hover:scale-105 transition-transform duration-300"
           />
           <div className="absolute top-4 right-4">
             <span className="bg-accent text-textLight px-3 py-1 rounded-full text-xs font-bold uppercase font-montserrat">

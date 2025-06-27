@@ -1,17 +1,16 @@
-"use client";
-
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
 import { getEventoBySlug } from '../../../data/eventos';
 
 interface EventoDetalleProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-export default function EventoDetalle({ params }: EventoDetalleProps) {
-  const { slug } = params;
+export default async function EventoDetalle({ params }: EventoDetalleProps) {
+  const { slug } = await params;
   const evento = getEventoBySlug(slug);
 
   if (!evento) {
@@ -24,12 +23,12 @@ export default function EventoDetalle({ params }: EventoDetalleProps) {
           <p className="text-textSecondary font-montserrat mb-6">
             El evento que buscas no existe o ha sido eliminado.
           </p>
-          <a 
+          <Link 
             href="/eventos"
             className="inline-block bg-accent text-textLight px-6 py-3 rounded-lg font-medium hover:bg-primary transition-colors font-montserrat"
           >
             Volver a Eventos
-          </a>
+          </Link>
         </div>
       </main>
     );
@@ -46,28 +45,19 @@ export default function EventoDetalle({ params }: EventoDetalleProps) {
     });
   };
 
-  const formatearFechaCorta = (fechaISO: string) => {
-    const fecha = new Date(fechaISO);
-    return fecha.toLocaleDateString('es-ES', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    });
-  };
-
   return (
     <main className="bg-bgDark min-h-screen">
       {/* Navegación */}
       <div className="bg-bgDarkSection py-4">
         <div className="container mx-auto px-8 md:px-16 max-w-6xl">
           <nav className="flex items-center gap-2 text-sm font-montserrat">
-            <a href="/" className="text-textSecondary hover:text-accent transition-colors">
+            <Link href="/" className="text-textSecondary hover:text-accent transition-colors">
               Inicio
-            </a>
+            </Link>
             <span className="text-textSecondary">/</span>
-            <a href="/eventos" className="text-textSecondary hover:text-accent transition-colors">
+            <Link href="/eventos" className="text-textSecondary hover:text-accent transition-colors">
               Eventos
-            </a>
+            </Link>
             <span className="text-textSecondary">/</span>
             <span className="text-textLight">{evento.titulo}</span>
           </nav>
@@ -77,10 +67,11 @@ export default function EventoDetalle({ params }: EventoDetalleProps) {
       {/* Hero del Evento */}
       <section className="relative h-[50vh] md:h-[60vh]">
         <div className="absolute inset-0">
-          <img 
+          <Image 
             src={evento.imagenPrincipal} 
             alt={evento.titulo}
-            className="w-full h-full object-cover"
+            style={{objectFit: "cover"}}
+            fill
           />
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
@@ -266,12 +257,12 @@ export default function EventoDetalle({ params }: EventoDetalleProps) {
                   Compartir Evento
                 </button>
                 
-                <a 
+                <Link 
                   href="/contacto"
                   className="block w-full text-center bg-bgDark text-textLight py-3 rounded-lg font-medium hover:bg-bgDarkSection transition-colors font-montserrat border border-bgDark"
                 >
                   Más Información
-                </a>
+                </Link>
               </div>
 
               {/* Mapa (si tiene coordenadas) */}
@@ -303,12 +294,12 @@ export default function EventoDetalle({ params }: EventoDetalleProps) {
           </div>
           
           <div className="text-center">
-            <a 
+            <Link 
               href="/eventos"
               className="inline-block bg-accent text-textLight px-8 py-3 rounded-lg font-medium hover:bg-primary transition-colors font-montserrat"
             >
               Ver Todos los Eventos
-            </a>
+            </Link>
           </div>
         </div>
       </section>

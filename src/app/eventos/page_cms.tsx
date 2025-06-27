@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useFilteredEvents } from '../../hooks/useCMS';
 import { CMSContentWrapper, useDateFormatter } from '../../components/cms/CMSComponents';
 import { CMSEvent } from '../../types/cms';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function EventosPageCMS() {
   const { 
@@ -37,10 +39,11 @@ export default function EventosPageCMS() {
   const EventCard: React.FC<{ event: CMSEvent }> = ({ event }) => (
     <div className="bg-bgDarkSection rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-bgDark hover:border-accent/30">
       <div className="relative h-48">
-        <img
+        <Image
           src={event.images[0]?.url || '/images/placeholder-event.jpg'}
           alt={event.images[0]?.alt || event.title}
           className="w-full h-full object-cover"
+          fill
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
         
@@ -97,12 +100,12 @@ export default function EventosPageCMS() {
             )}
           </div>
 
-          <a
+          <Link
             href={`/eventos/${event.slug}`}
             className="bg-accent text-textLight px-4 py-2 rounded-lg font-medium text-sm hover:bg-primary transition-colors font-montserrat"
           >
             Ver detalles
-          </a>
+          </Link>
         </div>
 
         {event.artists && event.artists.length > 0 && (
@@ -135,16 +138,6 @@ export default function EventosPageCMS() {
       'festival': 'Festival'
     };
     return labels[category] || category;
-  };
-
-  const getStatusColor = (status: string): string => {
-    const colors: Record<string, string> = {
-      'upcoming': 'text-blue-400',
-      'ongoing': 'text-green-400',
-      'completed': 'text-gray-400',
-      'cancelled': 'text-red-400'
-    };
-    return colors[status] || 'text-gray-400';
   };
 
   return (

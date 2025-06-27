@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 interface HeroFestivalProps {
   tituloEdicion: string;
@@ -31,10 +32,13 @@ const HeroFestival: React.FC<HeroFestivalProps> = ({
       <div className="absolute inset-0 bg-black/40"></div>
       <div className="relative z-10 text-center text-white px-4 sm:px-6 max-w-4xl mx-auto">
         {logoFestival && (
-          <img 
-            src={logoFestival} 
-            alt="Logo Festival" 
-            className="w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 mx-auto mb-4 sm:mb-6 object-contain"
+          <Image
+            src={logoFestival}
+            alt="Logo Festival"
+            width={112}
+            height={112}
+            style={{objectFit: "contain"}}
+            className="mx-auto mb-4 sm:mb-6"
           />
         )}
         <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold font-cinzel uppercase mb-3 sm:mb-4 leading-tight">

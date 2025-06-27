@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { getFestivalData } from '../../../../data/festival';
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface EventoCronogramaProps {
   fecha: string;
@@ -179,10 +181,12 @@ export default function Cronograma2023() {
             </div>
             
             <div className="relative">
-              <img 
+              <Image 
                 src="/images/festival/2023/cronograma-actividades.jpg" 
                 alt="Actividades del festival 2023"
                 className="w-full rounded-xl shadow-lg"
+                width={500}
+                height={300}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-xl"></div>
             </div>
@@ -190,18 +194,18 @@ export default function Cronograma2023() {
 
           <div className="text-center mt-12">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
+              <Link 
                 href="/festival/2023"
                 className="bg-accent text-textLight px-8 py-3 rounded-lg font-medium hover:bg-primary transition-colors font-montserrat"
               >
                 Volver al Festival 2023
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="/festival/2023/invitados"
                 className="bg-transparent border-2 border-accent text-accent px-8 py-3 rounded-lg font-medium hover:bg-accent hover:text-textLight transition-colors font-montserrat"
               >
                 Ver Artistas Invitados
-              </a>
+              </Link>
             </div>
           </div>
         </div>

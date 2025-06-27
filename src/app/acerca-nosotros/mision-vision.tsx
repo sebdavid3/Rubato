@@ -1,4 +1,5 @@
 import React from "react";
+import Image from 'next/image';
 
 export default function MisionVision() {
   return (
@@ -31,9 +32,11 @@ export default function MisionVision() {
             <div className="bg-bgSection rounded-xl shadow-lg p-8 md:p-12">
               <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="md:w-1/3">
-                  <img 
+                  <Image 
                     src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop" 
                     alt="Estudiantes en formación musical"
+                    width={400}
+                    height={300}
                     className="w-full h-64 md:h-80 object-cover rounded-lg shadow-md"
                   />
                 </div>
@@ -60,9 +63,11 @@ export default function MisionVision() {
             <div className="bg-bgSection rounded-xl shadow-lg p-8 md:p-12">
               <div className="flex flex-col md:flex-row-reverse items-center gap-8">
                 <div className="md:w-1/3">
-                  <img 
+                  <Image 
                     src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=400&h=300&fit=crop" 
                     alt="Festival de música"
+                    width={400}
+                    height={300}
                     className="w-full h-64 md:h-80 object-cover rounded-lg shadow-md"
                   />
                 </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Patrocinador } from '../../data/festival';
+import Image from 'next/image';
 
 interface SponsorBannerProps {
   titulo: string;
@@ -39,23 +40,27 @@ const SponsorBanner: React.FC<SponsorBannerProps> = ({ titulo, patrocinadores, d
                   className="flex items-center justify-center p-4 sm:p-6 bg-white rounded-lg hover:shadow-lg transition-shadow duration-300 min-h-[100px] sm:min-h-[120px]"
                 >
                   {patrocinador.sitioWeb ? (
-                    <a 
-                      href={patrocinador.sitioWeb} 
-                      target="_blank" 
+                    <a
+                      href={patrocinador.sitioWeb}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="flex w-full h-full items-center justify-center"
                     >
-                      <img 
-                        src={patrocinador.logoUrl} 
+                      <Image
+                        src={patrocinador.logoUrl}
                         alt={patrocinador.nombre}
-                        className="w-full h-12 sm:h-16 object-contain hover:scale-105 transition-transform duration-300"
+                        width={150}
+                        height={60}
+                        className="object-contain hover:scale-105 transition-transform duration-300"
                       />
                     </a>
                   ) : (
-                    <img 
-                      src={patrocinador.logoUrl} 
+                    <Image
+                      src={patrocinador.logoUrl}
                       alt={patrocinador.nombre}
-                      className="w-full h-12 sm:h-16 object-contain"
+                      width={150}
+                      height={60}
+                      className="object-contain"
                     />
                   )}
                 </div>
@@ -76,23 +81,27 @@ const SponsorBanner: React.FC<SponsorBannerProps> = ({ titulo, patrocinadores, d
                   className="flex items-center justify-center p-3 sm:p-4 bg-white rounded-lg hover:shadow-lg transition-shadow duration-300 min-h-[80px] sm:min-h-[100px]"
                 >
                   {patrocinador.sitioWeb ? (
-                    <a 
-                      href={patrocinador.sitioWeb} 
-                      target="_blank" 
+                    <a
+                      href={patrocinador.sitioWeb}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="flex w-full h-full items-center justify-center"
                     >
-                      <img 
-                        src={patrocinador.logoUrl} 
+                      <Image
+                        src={patrocinador.logoUrl}
                         alt={patrocinador.nombre}
-                        className="w-full h-8 sm:h-10 md:h-12 object-contain hover:scale-105 transition-transform duration-300"
+                        width={120}
+                        height={50}
+                        className="object-contain hover:scale-105 transition-transform duration-300"
                       />
                     </a>
                   ) : (
-                    <img 
-                      src={patrocinador.logoUrl} 
+                    <Image
+                      src={patrocinador.logoUrl}
                       alt={patrocinador.nombre}
-                      className="w-full h-8 sm:h-10 md:h-12 object-contain"
+                      width={120}
+                      height={50}
+                      className="object-contain"
                     />
                   )}
                 </div>
@@ -113,23 +122,27 @@ const SponsorBanner: React.FC<SponsorBannerProps> = ({ titulo, patrocinadores, d
                   className="flex items-center justify-center p-2 sm:p-3 bg-white rounded-lg hover:shadow-lg transition-shadow duration-300 min-h-[60px] sm:min-h-[70px]"
                 >
                   {patrocinador.sitioWeb ? (
-                    <a 
-                      href={patrocinador.sitioWeb} 
-                      target="_blank" 
+                    <a
+                      href={patrocinador.sitioWeb}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="flex w-full h-full items-center justify-center"
                     >
-                      <img 
-                        src={patrocinador.logoUrl} 
+                      <Image
+                        src={patrocinador.logoUrl}
                         alt={patrocinador.nombre}
-                        className="w-full h-6 sm:h-8 object-contain hover:scale-105 transition-transform duration-300"
+                        width={100}
+                        height={40}
+                        className="object-contain hover:scale-105 transition-transform duration-300"
                       />
                     </a>
                   ) : (
-                    <img 
-                      src={patrocinador.logoUrl} 
+                    <Image
+                      src={patrocinador.logoUrl}
                       alt={patrocinador.nombre}
-                      className="w-full h-6 sm:h-8 object-contain"
+                      width={100}
+                      height={40}
+                      className="object-contain"
                     />
                   )}
                 </div>

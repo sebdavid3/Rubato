@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useState } from 'react';
-import { eventos, getEventosDestacados, getEventosProximos, Evento } from '../../data/eventos';
+import React from 'react';
+import { eventos, getEventosDestacados } from '../../data/eventos';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function EventosPage() {
-  const [filtroCategoria, setFiltroCategoria] = useState<string>('todos');
-  const [filtroEstado, setFiltroEstado] = useState<string>('todos');
+  const [filtroCategoria, setFiltroCategoria] = React.useState<string>('todos');
+  const [filtroEstado, setFiltroEstado] = React.useState<string>('todos');
 
   // Filtrar eventos según los criterios seleccionados
   const eventosFiltrados = eventos.filter(evento => {
@@ -79,10 +81,12 @@ export default function EventosPage() {
               {eventosDestacados.slice(0, 3).map((evento) => (
                 <div key={evento.id} className="bg-bgDark rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                   <div className="relative">
-                    <img 
+                    <Image 
                       src={evento.imagenPrincipal} 
                       alt={evento.titulo}
                       className="w-full h-48 object-cover"
+                      width={350}
+                      height={192}
                     />
                     <div className="absolute top-4 right-4">
                       <span className="bg-accent text-textLight px-3 py-1 rounded-full text-xs font-bold uppercase font-montserrat">
@@ -121,12 +125,12 @@ export default function EventosPage() {
                         {evento.ubicacion}
                       </span>
                     </div>
-                    <a 
+                    <Link 
                       href={`/eventos/${evento.slug}`}
                       className="inline-block bg-accent text-textLight px-6 py-2 rounded-lg font-medium hover:bg-primary transition-colors font-montserrat text-sm"
                     >
                       Ver Detalles
-                    </a>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -190,10 +194,12 @@ export default function EventosPage() {
               <div key={evento.id} className="bg-bgDarkSection rounded-xl p-6 hover:bg-bgDark transition-colors duration-300">
                 <div className="grid md:grid-cols-4 gap-6 items-center">
                   <div className="md:col-span-1">
-                    <img 
+                    <Image 
                       src={evento.imagenPrincipal} 
                       alt={evento.titulo}
                       className="w-full h-32 object-cover rounded-lg"
+                      width={230}
+                      height={128}
                     />
                   </div>
                   
@@ -255,12 +261,12 @@ export default function EventosPage() {
                       </div>
                     )}
                     
-                    <a 
+                    <Link 
                       href={`/eventos/${evento.slug}`}
                       className="inline-block bg-accent text-textLight px-6 py-2 rounded-lg font-medium hover:bg-primary transition-colors font-montserrat text-sm"
                     >
                       Ver Detalles
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

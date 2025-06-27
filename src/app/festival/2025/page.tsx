@@ -1,6 +1,8 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import HeroFestival from '../../../components/festival/HeroFestival';
 import ArtistGrid from '../../../components/festival/ArtistGrid';
 import SponsorBanner from '../../../components/festival/SponsorBanner';
@@ -64,7 +66,7 @@ export default function Festival2025() {
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <a 
+            <Link 
               href="/festival/mision-vision" 
               className="bg-bgDark rounded-lg p-4 sm:p-6 text-center hover:bg-accent transition-colors group min-h-[120px] sm:min-h-[140px] flex flex-col items-center justify-center touch-manipulation active:scale-95"
             >
@@ -73,52 +75,52 @@ export default function Festival2025() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xs sm:text-sm font-bold text-textLight font-montserrat group-hover:text-bgDark transition-colors text-center leading-tight">
+              <h3 className="text-xs sm:text-sm font-bold text-textLight font-montserrat group-hover:text-bgDark transition-colores text-center leading-tight">
                 Misión y Visión
               </h3>
-            </a>
+            </Link>
 
-            <a 
+            <Link 
               href="/festival/2025/invitados" 
-              className="bg-bgDark rounded-lg p-4 sm:p-6 text-center hover:bg-accent transition-colors group min-h-[120px] sm:min-h-[140px] flex flex-col items-center justify-center touch-manipulation active:scale-95"
+              className="bg-bgDark rounded-lg p-4 sm:p-6 text-center hover:bg-accent transition-colores group min-h-[120px] sm:min-h-[140px] flex flex-col items-center justify-center touch-manipulation active:scale-95"
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent group-hover:bg-bgDark rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 transition-colors">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent group-hover:bg-bgDark rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 transition-colores">
                 <svg className="w-5 h-5 sm:w-6 sm:h-6 text-textLight" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
                 </svg>
               </div>
-              <h3 className="text-xs sm:text-sm font-bold text-textLight font-montserrat group-hover:text-bgDark transition-colors text-center leading-tight">
+              <h3 className="text-xs sm:text-sm font-bold text-textLight font-montserrat group-hover:text-bgDark transition-colores text-center leading-tight">
                 Artistas Invitados
               </h3>
-            </a>
+            </Link>
 
-            <a 
+            <Link 
               href="/festival/2025/cronograma" 
-              className="bg-bgDark rounded-lg p-4 sm:p-6 text-center hover:bg-accent transition-colors group min-h-[120px] sm:min-h-[140px] flex flex-col items-center justify-center touch-manipulation active:scale-95"
+              className="bg-bgDark rounded-lg p-4 sm:p-6 text-center hover:bg-accent transition-colores group min-h-[120px] sm:min-h-[140px] flex flex-col items-center justify-center touch-manipulation active:scale-95"
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent group-hover:bg-bgDark rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 transition-colors">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent group-hover:bg-bgDark rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 transition-colores">
                 <svg className="w-5 h-5 sm:w-6 sm:h-6 text-textLight" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 className="text-xs sm:text-sm font-bold text-textLight font-montserrat group-hover:text-bgDark transition-colors text-center leading-tight">
+              <h3 className="text-xs sm:text-sm font-bold text-textLight font-montserrat group-hover:text-bgDark transition-colores text-center leading-tight">
                 Cronograma
               </h3>
-            </a>
+            </Link>
 
-            <a 
+            <Link 
               href="/festival/2025/inscripciones" 
-              className="bg-bgDark rounded-lg p-4 sm:p-6 text-center hover:bg-accent transition-colors group min-h-[120px] sm:min-h-[140px] flex flex-col items-center justify-center touch-manipulation active:scale-95"
+              className="bg-bgDark rounded-lg p-4 sm:p-6 text-center hover:bg-accent transition-colores group min-h-[120px] sm:min-h-[140px] flex flex-col items-center justify-center touch-manipulation active:scale-95"
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent group-hover:bg-bgDark rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 transition-colors">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent group-hover:bg-bgDark rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 transition-colores">
                 <svg className="w-5 h-5 sm:w-6 sm:h-6 text-textLight" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
               </div>
-              <h3 className="text-xs sm:text-sm font-bold text-textLight font-montserrat group-hover:text-bgDark transition-colors text-center leading-tight">
+              <h3 className="text-xs sm:text-sm font-bold text-textLight font-montserrat group-hover:text-bgDark transition-colores text-center leading-tight">
                 Inscripciones
               </h3>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -144,9 +146,10 @@ export default function Festival2025() {
             {artistas && artistas.slice(0, 3).map((artista) => (
               <div key={artista.id} className="bg-bgDarkSection rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-bgDark hover:border-accent/30">
                 <div className="relative h-48 sm:h-56 md:h-64">
-                  <img
+                  <Image
                     src={artista.profileImage.url}
                     alt={artista.profileImage.alt || artista.name}
+                    fill
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop";
@@ -172,15 +175,15 @@ export default function Festival2025() {
           </div>
 
           <div className="text-center">
-            <a 
+            <Link 
               href="/festival/2025/invitados"
-              className="inline-flex items-center gap-2 bg-accent text-textLight px-6 sm:px-8 py-3 rounded-lg font-medium hover:bg-primary transition-colors font-montserrat text-sm sm:text-base active:scale-95 touch-manipulation"
+              className="inline-flex items-center gap-2 bg-accent text-textLight px-6 sm:px-8 py-3 rounded-lg font-medium hover:bg-primary transition-colores font-montserrat text-sm sm:text-base active:scale-95 touch-manipulation"
             >
               Ver Todos los Artistas Invitados
               <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -206,18 +209,19 @@ export default function Festival2025() {
                 El festival incluirá conciertos diarios, masterclasses con artistas invitados, 
                 talleres de música de cámara y eventos especiales para toda la familia.
               </p>
-              <a 
+              <Link 
                 href="/festival/2025/cronograma"
-                className="inline-block bg-accent text-textLight px-6 sm:px-8 py-3 rounded-lg font-medium hover:bg-primary transition-colors font-montserrat text-sm sm:text-base active:scale-95 touch-manipulation"
+                className="inline-block bg-accent text-textLight px-6 sm:px-8 py-3 rounded-lg font-medium hover:bg-primary transition-colores font-montserrat text-sm sm:text-base active:scale-95 touch-manipulation"
               >
                 Ver Cronograma Completo
-              </a>
+              </Link>
             </div>
-            <div className="relative order-1 lg:order-2">
-              <img 
+            <div className="relative order-1 lg:order-2 h-64">
+              <Image 
                 src="/images/festival/2025/cronograma-preview.jpg" 
                 alt="Vista previa del cronograma"
-                className="w-full rounded-xl shadow-lg"
+                fill
+                className="w-full rounded-xl shadow-lg object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-xl"></div>
             </div>
@@ -241,14 +245,16 @@ export default function Festival2025() {
             <div className="bg-bgDarkSection rounded-xl p-6 sm:p-8 text-center">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
                 <svg className="w-6 h-6 sm:w-8 sm:h-8 text-textLight" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v2M7 7h10" />
                 </svg>
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-textLight font-cinzel mb-3 sm:mb-4">Masterclasses</h3>
               <p className="text-textSecondary font-montserrat mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">
                 Clases magistrales con artistas internacionales para estudiantes avanzados.
               </p>
-              <p className="text-accent font-bold text-xl sm:text-2xl font-montserrat">$150.000</p>
+              <Link href="/festival/2025/inscripciones" className="text-accent font-bold hover:underline font-montserrat text-sm sm:text-base">
+                Inscríbete aquí
+              </Link>
             </div>
 
             <div className="bg-bgDarkSection rounded-xl p-6 sm:p-8 text-center">
@@ -261,7 +267,9 @@ export default function Festival2025() {
               <p className="text-textSecondary font-montserrat mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">
                 Talleres grupales de música de cámara y técnica instrumental.
               </p>
-              <p className="text-accent font-bold text-xl sm:text-2xl font-montserrat">$80.000</p>
+              <Link href="/festival/2025/inscripciones" className="text-accent font-bold hover:underline font-montserrat text-sm sm:text-base">
+                Más información
+              </Link>
             </div>
 
             <div className="bg-bgDarkSection rounded-xl p-6 sm:p-8 text-center sm:col-span-2 lg:col-span-1">
@@ -278,47 +286,23 @@ export default function Festival2025() {
             </div>
           </div>
 
-          <div className="text-center mt-8 sm:mt-12">
-            <a 
+          <div className="mt-12 sm:mt-16 text-center">
+            <Link 
               href="/festival/2025/inscripciones"
-              className="inline-block bg-primary text-textLight px-8 sm:px-12 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-accent transition-colors font-montserrat active:scale-95 touch-manipulation"
+              className="inline-block bg-accent text-textLight px-8 sm:px-10 py-4 rounded-lg font-bold hover:bg-primary transition-colores font-montserrat text-base sm:text-lg active:scale-95 touch-manipulation"
             >
-              Inscríbete Ahora
-            </a>
+              Inscríbete Ahora en el Festival
+            </Link>
           </div>
         </div>
       </section>
 
-      <SponsorBanner
-        titulo="Nuestros Aliados"
-        patrocinadores={patrocinadores ? patrocinadores.map(adaptCMSSponsorToPatrocinador) : []}
-        descripcion="Gracias a nuestros patrocinadores y colaboradores que hacen posible este festival."
-      />
-
-      {/* Enlace a Ediciones Pasadas */}
-      <section className="py-12 sm:py-16 md:py-20 bg-bgDarkSection">
-        <div className="container mx-auto px-4 sm:px-8 md:px-16 max-w-4xl text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-textLight font-cinzel uppercase mb-3 sm:mb-4">
-            Nuestra Historia
-          </h2>
-          <div className="w-16 sm:w-24 h-1 bg-accent mx-auto mb-4 sm:mb-6"></div>
-          <p className="text-textSecondary text-base sm:text-lg font-montserrat mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">
-            Desde 2023, el Festival Internacional de Música Rubato ha sido un espacio de encuentro 
-            para músicos de talla mundial y jóvenes talentos. Revive los momentos más especiales 
-            de nuestras ediciones anteriores.
-          </p>
-          
-          <a 
-            href="/festival/archivo"
-            className="inline-flex items-center gap-2 sm:gap-3 bg-accent text-textLight px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-medium text-base sm:text-lg hover:bg-primary transition-colors font-montserrat active:scale-95 touch-manipulation"
-          >
-            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-            Ver Ediciones Pasadas
-          </a>
-        </div>
-      </section>
+      {patrocinadores && patrocinadores.length > 0 && (
+        <SponsorBanner 
+          patrocinadores={patrocinadores.map(adaptCMSSponsorToPatrocinador)} 
+          titulo="Patrocinadores del Festival"
+        />
+      )}
     </main>
   );
 }

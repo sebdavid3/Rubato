@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 
 // Componente para tarjeta de método de donación
 const DonationMethodCard: React.FC<{
@@ -14,26 +15,6 @@ const DonationMethodCard: React.FC<{
   showDetails?: boolean;
   isExpandable?: boolean;
 }> = ({ title, details, icon, actionText, actionUrl, isExternal = false, onClick, showDetails = false, isExpandable = false }) => {
-  const copyToClipboard = () => {
-    if (details) {
-      const textToCopy = details.join('\n');
-      
-      // Verificar si el navegador soporta clipboard API
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(textToCopy)
-          .then(() => {
-            alert('Datos bancarios copiados al portapapeles');
-          })
-          .catch(() => {
-            // Fallback si falla el clipboard API
-            fallbackCopyTextToClipboard(textToCopy);
-          });
-      } else {
-        // Fallback para navegadores que no soportan clipboard API
-        fallbackCopyTextToClipboard(textToCopy);
-      }
-    }
-  };
 
   const fallbackCopyTextToClipboard = (text: string) => {
     const textArea = document.createElement("textarea");
@@ -56,7 +37,7 @@ const DonationMethodCard: React.FC<{
       } else {
         alert('No se pudo copiar automáticamente. Selecciona y copia manualmente los datos.');
       }
-    } catch (err) {
+    } catch (error) {
       alert('No se pudo copiar automáticamente. Selecciona y copia manualmente los datos.');
     }
     
@@ -198,11 +179,12 @@ const ImpactSection: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="relative">
-              <img 
+            <div className="relative h-64">
+              <Image 
                 src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=600&h=400&fit=crop"
                 alt="Estudiantes en clase de música"
-                className="w-full rounded-xl shadow-lg"
+                fill
+                className="object-cover rounded-xl shadow-lg"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-xl"></div>
             </div>
@@ -267,9 +249,10 @@ const Apoyanos: React.FC = () => {
     <main className="bg-bgDark min-h-screen">
       {/* Hero Section */}
       <section className="relative w-full h-[60vh] md:h-[70vh] flex items-center justify-center">
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&h=800&fit=crop"
           alt="Orquesta juvenil en concierto"
+          fill
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/60"></div>
@@ -400,11 +383,12 @@ const Apoyanos: React.FC = () => {
                 </svg>
               </a>
             </div>
-            <div className="relative">
-              <img 
+            <div className="relative h-96">
+              <Image 
                 src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&h=600&fit=crop"
                 alt="Voluntarios apoyando evento musical"
-                className="w-full rounded-xl shadow-lg"
+                fill
+                className="object-cover w-full rounded-xl shadow-lg"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-xl"></div>
             </div>
