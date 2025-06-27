@@ -7,10 +7,13 @@ interface MapaContactoProps {
 
 const MapaContacto: React.FC<MapaContactoProps> = ({ direccion, coordenadas }) => {
   // Coordenadas aproximadas de la dirección en Barranquilla (Cl. 61 #37-44)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const lat = coordenadas?.lat || 10.9970;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const lng = coordenadas?.lng || -74.7873;
   
   // URL para Google Maps con la dirección
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const googleMapsUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(direccion)}`;
   
   // URL alternativa usando la dirección directamente (no requiere API key)

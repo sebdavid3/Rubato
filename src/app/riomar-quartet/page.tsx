@@ -75,7 +75,7 @@ export default function RioMarQuartetPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {agrupacion.integrantes
               .sort((a, b) => a.orden - b.orden)
-              .map((integrante, index) => (
+              .map((integrante) => (
                 <div key={integrante.id} className="bg-bgDark rounded-xl p-6 text-center shadow-lg">
                   <div className="relative w-32 h-32 mx-auto mb-6">
                     <Image

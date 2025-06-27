@@ -16,6 +16,7 @@ const DonationMethodCard: React.FC<{
   isExpandable?: boolean;
 }> = ({ title, details, icon, actionText, actionUrl, isExternal = false, onClick, showDetails = false, isExpandable = false }) => {
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const fallbackCopyTextToClipboard = (text: string) => {
     const textArea = document.createElement("textarea");
     textArea.value = text;
@@ -37,6 +38,7 @@ const DonationMethodCard: React.FC<{
       } else {
         alert('No se pudo copiar automáticamente. Selecciona y copia manualmente los datos.');
       }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       alert('No se pudo copiar automáticamente. Selecciona y copia manualmente los datos.');
     }

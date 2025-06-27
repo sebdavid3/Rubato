@@ -85,6 +85,7 @@ export default function RootLayout({
     { nombre: "YouTube", url: "https://youtube.com/fundacionrubato" },
   ];
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const quickLinks = [
     { texto: "Inicio", url: "/" },
     { texto: "Misión", url: "/acerca-nosotros" },

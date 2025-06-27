@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { getNoticiaPorSlug, getNoticiasRecientes } from '../../../data/noticias';
 
@@ -21,12 +22,12 @@ export default function NoticiaDetallePage() {
           <p className="text-textSecondary font-montserrat mb-8">
             La noticia que buscas no existe o ha sido removida.
           </p>
-          <a 
+          <Link 
             href="/noticias"
             className="inline-block bg-accent text-textLight px-8 py-3 rounded-lg font-medium hover:bg-primary transition-colors font-montserrat"
           >
             Ver todas las noticias
-          </a>
+          </Link>
         </div>
       </main>
     );
@@ -73,9 +74,9 @@ export default function NoticiaDetallePage() {
       <section className="bg-bgDarkSection py-4">
         <div className="container mx-auto px-8">
           <nav className="text-sm font-montserrat">
-            <a href="/" className="text-textSecondary hover:text-accent transition-colors">Inicio</a>
+            <Link href="/" className="text-textSecondary hover:text-accent transition-colors">Inicio</Link>
             <span className="text-textSecondary mx-2">›</span>
-            <a href="/noticias" className="text-textSecondary hover:text-accent transition-colors">Noticias</a>
+            <Link href="/noticias" className="text-textSecondary hover:text-accent transition-colors">Noticias</Link>
             <span className="text-textSecondary mx-2">›</span>
             <span className="text-textLight">{noticia.titulo}</span>
           </nav>
@@ -201,12 +202,12 @@ export default function NoticiaDetallePage() {
             </div>
 
             <div className="text-center mt-12">
-              <a 
+              <Link 
                 href="/noticias"
                 className="inline-block bg-accent text-textLight px-8 py-3 rounded-lg font-medium hover:bg-primary transition-colors font-montserrat"
               >
                 Ver todas las noticias
-              </a>
+              </Link>
             </div>
           </div>
         </section>

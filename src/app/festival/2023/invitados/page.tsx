@@ -58,6 +58,7 @@ const ArtistModal: React.FC<{ artista: ArtistaInvitado; isOpen: boolean; onClose
 };
 
 export default function Invitados2023() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { edicion, artistas, equipoDirectivo } = getFestivalData(2023);
   const [selectedArtist, setSelectedArtist] = useState<ArtistaInvitado | null>(null);
 

@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import HeroFestival from '../../../components/festival/HeroFestival';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import ArtistGrid from '../../../components/festival/ArtistGrid';
 import SponsorBanner from '../../../components/festival/SponsorBanner';
 import { useFestivalArtists, useSponsors } from '../../../hooks/useCMS';

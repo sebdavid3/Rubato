@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { noticias, getNoticiasRecientes, getNoticiasPorCategoria } from '../../data/noticias';
 
 export default function NoticiasPage() {

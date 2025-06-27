@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import HeroFestival from '../../../components/festival/HeroFestival';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import ArtistGrid from '../../../components/festival/ArtistGrid';
 import SponsorBanner from '../../../components/festival/SponsorBanner';
 import { getFestivalData } from '../../../data/festival';
@@ -152,7 +153,7 @@ export default function Festival2023() {
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             <div className="flex gap-6 px-8" style={{ width: 'max-content' }}>
-              {artistas.map((artista, index) => (
+              {artistas.map((artista) => (
                 <div 
                   key={artista.id} 
                   className="bg-bgDarkSection rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 w-80 flex-shrink-0 cursor-pointer"

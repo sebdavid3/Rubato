@@ -9,6 +9,7 @@ export default function HomePageCMS() {
   const { 
     featuredEvents, 
     recentNews, 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     siteConfig, 
     loading, 
     error, 

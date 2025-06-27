@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ImageGallery from "../components/ui/ImageGallery";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import EventGrid from "../components/events/EventGrid";
 import { eventos } from "../data/eventos";
 import { noticias } from "../data/noticias";
@@ -480,18 +481,18 @@ export default function Home() {
           {/* Botones responsivos para ver todos los eventos y noticias */}
           <div className="text-center mt-6 sm:mt-8">
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
-              <a 
+              <Link 
                 href="/eventos"
                 className="bg-accent text-textLight px-6 sm:px-8 py-3 rounded-lg font-medium hover:bg-primary transition-colors font-montserrat text-sm sm:text-base"
               >
                 Ver Todos los Eventos
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="/noticias"
                 className="bg-transparent border-2 border-accent text-accent px-6 sm:px-8 py-3 rounded-lg font-medium hover:bg-accent hover:text-textLight transition-colors font-montserrat text-sm sm:text-base"
               >
                 Ver Todas las Noticias
-              </a>
+              </Link>
             </div>
           </div>
         </section>

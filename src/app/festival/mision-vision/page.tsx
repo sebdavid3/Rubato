@@ -61,9 +61,9 @@ export default function MisionVisionFestival() {
             
             <div className="mt-8 text-center">
               <p className="text-lg font-montserrat text-textLight italic">
-                "Queremos que sea un festival cercano a la gente, que sea pensado por el público y para el público: 
+                &quot;Queremos que sea un festival cercano a la gente, que sea pensado por el público y para el público: 
                 que lo forme, lo entretenga y sobre todo lo haga reflexionar. Queremos un festival que sea de 
-                Barranquilla y de la región, de sus músicas y tradiciones."
+                Barranquilla y de la región, de sus músicas y tradiciones.&quot;
               </p>
             </div>
           </div>
