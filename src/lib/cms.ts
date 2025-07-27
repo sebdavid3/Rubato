@@ -1,70 +1,154 @@
 // Servicio de API para el CMS
-// Esta clase simula las llamadas que se harían a un CMS real como Strapi, Contentful, etc.
+// Esta clase integra específicamente con Strapi CMS
 
-import {
-  CMSApiResponse,
-  CMSQueryParams,
-  CMSPage,
-  CMSEvent,
-  CMSNews,
-  CMSArtist,
-  CMSSponsor,
-  CMSEnsemble,
-  CMSCourse,
-  CMSStudent,
-  CMSSiteConfig
-} from '../types/cms';
+import { CMSApiResponse, CMSEvent, CMSNews, CMSArtist, CMSSponsor, CMSEnsemble, CMSCourse, CMSPage, CMSSiteConfig, CMSStudent, CMSQueryParams } from '@/types/cms';
 
-// Configuración del CMS
+// Configuración del CMS - Strapi específico
 const CMS_CONFIG = {
   // En producción, esto vendría de variables de entorno
   API_URL: process.env.NEXT_PUBLIC_CMS_API_URL && process.env.NEXT_PUBLIC_CMS_API_URL !== '' 
     ? process.env.NEXT_PUBLIC_CMS_API_URL 
     : null,
   API_TOKEN: process.env.CMS_API_TOKEN,
+  CMS_TYPE: process.env.NEXT_PUBLIC_CMS_TYPE || 'strapi',
   // Configuración de cache
-  CACHE_TTL: 300, // 5 minutos
+  CACHE_TTL: parseInt(process.env.NEXT_PUBLIC_CMS_CACHE_TTL || '300'), // 5 minutos
   // Configuración de fallbacks
-  USE_FALLBACK_DATA: process.env.NODE_ENV === 'development' || !process.env.NEXT_PUBLIC_CMS_API_URL,
+  USE_FALLBACK_DATA: process.env.NODE_ENV === 'development' || 
+                     process.env.NEXT_PUBLIC_USE_FALLBACK_DATA === 'true' ||
+                     !process.env.NEXT_PUBLIC_CMS_API_URL,
+  // Debug mode
+  DEBUG_MODE: process.env.NEXT_PUBLIC_CMS_DEBUG === 'true',
 };
 
 class CMSService {
   private cache = new Map<string, { data: any; timestamp: number }>();
 
-  // Método genérico para hacer peticiones al CMS
+  // Método auxiliar para formatear una imagen individual de Strapi
+  private formatStrapiImage(imageData: any): any {
+    const img = imageData.attributes || imageData;
+    return {
+      id: imageData.id,
+      url: `${CMS_CONFIG.API_URL?.replace('/api', '')}${img.url}`,
+      alt: img.alternativeText || '',
+      width: img.width,
+      height: img.height,
+      caption: img.caption
+    };
+  }
+
+  // Método auxiliar para formatear múltiples imágenes de Strapi
+  private formatStrapiImageArray(imagesData: any[]): any[] {
+    return imagesData.map(img => this.formatStrapiImage(img));
+  }
+
+  // Método específico para formatear respuestas de Strapi
+  private formatStrapiResponse<T>(strapiData: any): T[] | T {
+    if (Array.isArray(strapiData.data)) {
+      return strapiData.data.map((item: any) => this.formatStrapiItem(item));
+    } else if (strapiData.data) {
+      return this.formatStrapiItem(strapiData.data);
+    }
+    return strapiData;
+  }
+
+  // Formatear un item individual de Strapi
+  private formatStrapiItem(item: any): any {
+    const formatted = {
+      id: item.id,
+      slug: item.attributes.slug,
+      status: item.attributes.publishedAt ? 'published' : 'draft',
+      createdAt: item.attributes.createdAt,
+      updatedAt: item.attributes.updatedAt,
+      publishedAt: item.attributes.publishedAt,
+      ...item.attributes
+    };
+
+    // Procesar imágenes usando método auxiliar
+    if (item.attributes.images?.data) {
+      formatted.images = this.formatStrapiImageArray(item.attributes.images.data);
+    }
+
+    // Procesar imagen destacada usando método auxiliar
+    if (item.attributes.featuredImage?.data) {
+      formatted.featuredImage = this.formatStrapiImage(item.attributes.featuredImage.data);
+    }
+
+    // Procesar galería de imágenes usando método auxiliar
+    if (item.attributes.galleryImages?.data) {
+      formatted.galleryImages = this.formatStrapiImageArray(item.attributes.galleryImages.data);
+    }
+
+    return formatted;
+  }
+
+  // Método genérico para hacer peticiones al CMS con soporte específico para Strapi
   private async fetchFromCMS<T>(
     endpoint: string,
     params?: CMSQueryParams
   ): Promise<CMSApiResponse<T>> {
     const cacheKey = `${endpoint}${JSON.stringify(params || {})}`;
     
+    if (CMS_CONFIG.DEBUG_MODE) {
+      console.log(`🔍 CMS Request: ${endpoint}`, params);
+    }
+    
     // Verificar cache
     const cachedData = this.cache.get(cacheKey);
     if (cachedData && Date.now() - cachedData.timestamp < CMS_CONFIG.CACHE_TTL * 1000) {
+      if (CMS_CONFIG.DEBUG_MODE) {
+        console.log(`📦 Cache hit for ${endpoint}`);
+      }
       return cachedData.data;
     }
 
     // Si no hay API URL configurada o estamos en desarrollo, usar datos de fallback
     if (!CMS_CONFIG.API_URL || CMS_CONFIG.API_URL === '' || CMS_CONFIG.USE_FALLBACK_DATA) {
-      console.log(`Using fallback data for ${endpoint}`);
+      if (CMS_CONFIG.DEBUG_MODE) {
+        console.log(`🔄 Using fallback data for ${endpoint}`);
+      }
       return this.getFallbackData<T>(endpoint, params);
     }
 
     try {
       const url = new URL(`${CMS_CONFIG.API_URL}${endpoint}`);
       
-      // Agregar parámetros de query
+      // Configurar parámetros específicos de Strapi
       if (params?.populate) {
         url.searchParams.append('populate', params.populate.join(','));
+      } else {
+        // Poblar campos por defecto para cada tipo de contenido
+        if (endpoint.includes('/events')) {
+          url.searchParams.append('populate', 'images,metadata,metadata.ogImage');
+        } else if (endpoint.includes('/news')) {
+          url.searchParams.append('populate', 'featuredImage,galleryImages,metadata,metadata.ogImage');
+        } else if (endpoint.includes('/artists')) {
+          url.searchParams.append('populate', 'profileImage,galleryImages,metadata');
+        } else if (endpoint.includes('/ensembles')) {
+          url.searchParams.append('populate', 'featuredImage,galleryImages,upcomingEvents,metadata');
+        }
       }
+      
+      // Agregar filtros de Strapi
       if (params?.filters) {
         Object.entries(params.filters).forEach(([key, value]) => {
-          url.searchParams.append(`filters[${key}]`, value);
+          if (value !== undefined && value !== null && value !== 'all') {
+            url.searchParams.append(`filters[${key}][$eq]`, value.toString());
+          }
         });
       }
+      
+      // Agregar ordenamiento
       if (params?.sort) {
-        url.searchParams.append('sort', params.sort.join(','));
+        params.sort.forEach(sortParam => {
+          url.searchParams.append('sort', sortParam);
+        });
+      } else {
+        // Ordenamiento por defecto
+        url.searchParams.append('sort', 'createdAt:desc');
       }
+      
+      // Agregar paginación
       if (params?.pagination) {
         if (params.pagination.page) {
           url.searchParams.append('pagination[page]', params.pagination.page.toString());
@@ -72,6 +156,10 @@ class CMSService {
         if (params.pagination.pageSize) {
           url.searchParams.append('pagination[pageSize]', params.pagination.pageSize.toString());
         }
+      }
+
+      if (CMS_CONFIG.DEBUG_MODE) {
+        console.log(`🌐 Fetching from: ${url.toString()}`);
       }
 
       const response = await fetch(url.toString(), {
@@ -82,20 +170,33 @@ class CMSService {
       });
 
       if (!response.ok) {
-        throw new Error(`CMS API Error: ${response.status} ${response.statusText}`);
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
 
-      const data = await response.json();
+      const rawData = await response.json();
+      
+      // Formatear respuesta específica de Strapi
+      const formattedData = this.formatStrapiResponse<T>(rawData);
+      
+      const result = { 
+        data: formattedData as T,
+        meta: rawData.meta
+      };
       
       // Guardar en cache
-      this.cache.set(cacheKey, { data, timestamp: Date.now() });
+      this.cache.set(cacheKey, { data: result, timestamp: Date.now() });
       
-      return data;
+      if (CMS_CONFIG.DEBUG_MODE) {
+        console.log(`✅ CMS Response for ${endpoint}:`, result);
+      }
+      
+      return result;
     } catch (error) {
-      console.error('Error fetching from CMS:', error);
+      console.error('❌ Error fetching from CMS:', error);
       
       // Si está habilitado, usar datos de fallback
       if (CMS_CONFIG.USE_FALLBACK_DATA) {
+        console.log(`🔄 Falling back to local data for ${endpoint}`);
         return this.getFallbackData<T>(endpoint, params);
       }
       
@@ -407,6 +508,49 @@ class CMSService {
     this.cache.delete(cacheKey);
     // Hacer una nueva petición para actualizar el cache
     await this.fetchFromCMS(endpoint, params);
+  }
+
+  // === MÉTODOS WEBHOOK PARA REVALIDACIÓN ===
+
+  // Método para configurar webhooks de Strapi
+  async setupWebhooks(): Promise<void> {
+    if (!CMS_CONFIG.API_URL || !CMS_CONFIG.API_TOKEN) {
+      console.log('⚠️ No se pueden configurar webhooks: faltan credenciales de API');
+      return;
+    }
+
+    const webhooks = [
+      {
+        name: 'Frontend Revalidation - Events',
+        url: `${process.env.NEXT_PUBLIC_SITE_URL}/api/revalidate`,
+        headers: { 'x-revalidate-secret': process.env.REVALIDATION_SECRET },
+        events: ['entry.create', 'entry.update', 'entry.delete', 'entry.publish', 'entry.unpublish'],
+        contentTypes: ['api::event.event']
+      },
+      {
+        name: 'Frontend Revalidation - News',
+        url: `${process.env.NEXT_PUBLIC_SITE_URL}/api/revalidate`,
+        headers: { 'x-revalidate-secret': process.env.REVALIDATION_SECRET },
+        events: ['entry.create', 'entry.update', 'entry.delete', 'entry.publish', 'entry.unpublish'],
+        contentTypes: ['api::news.news']
+      }
+    ];
+
+    for (const webhook of webhooks) {
+      try {
+        await fetch(`${CMS_CONFIG.API_URL}/webhooks`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${CMS_CONFIG.API_TOKEN}`
+          },
+          body: JSON.stringify(webhook)
+        });
+        console.log(`✅ Webhook configurado: ${webhook.name}`);
+      } catch (error) {
+        console.error(`❌ Error configurando webhook ${webhook.name}:`, error);
+      }
+    }
   }
 }
 

@@ -2,11 +2,10 @@
 
 import React, { useState } from 'react';
 import HeroFestival from '../../../components/festival/HeroFestival';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import ArtistGrid from '../../../components/festival/ArtistGrid';
 import SponsorBanner from '../../../components/festival/SponsorBanner';
 import { getFestivalData } from '../../../data/festival';
 import type { ArtistaInvitado } from '../../../data/festival';
+import { SectionTitle } from '../../../components/ui';
 
 // Modal para mostrar información del artista
 const ArtistModal: React.FC<{ artista: ArtistaInvitado; isOpen: boolean; onClose: () => void }> = ({ artista, isOpen, onClose }) => {
@@ -103,10 +102,15 @@ export default function Festival2023() {
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-8 md:px-16 max-w-7xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-textLight font-cinzel uppercase mb-4">
+            <SectionTitle
+              level="h2"
+              size="xl"
+              centered
+              withDivider
+              className="mb-6"
+            >
               Artistas que Participaron
-            </h2>
-            <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
+            </SectionTitle>
             <p className="text-textSecondary text-lg font-montserrat max-w-3xl mx-auto">
               Revive los momentos especiales con los músicos internacionales que nos acompañaron en esta memorable edición.
             </p>

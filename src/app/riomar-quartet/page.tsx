@@ -3,6 +3,7 @@
 import React from 'react';
 import { riomarQuartet } from '../../data/agrupaciones';
 import Image from 'next/image';
+import { Card, SectionTitle, Button } from '../../components/ui';
 
 export default function RioMarQuartetPage() {
   const agrupacion = riomarQuartet;
@@ -13,9 +14,9 @@ export default function RioMarQuartetPage() {
       <section className="relative py-20 md:py-32 bg-gradient-to-r from-bgDarkSection to-bgDark">
         <div className="absolute inset-0 bg-[url('/images/riomar-quartet/hero-bg.jpg')] bg-cover bg-center opacity-20"></div>
         <div className="relative container mx-auto px-8 md:px-16 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-textLight font-cinzel uppercase mb-6">
+          <SectionTitle level="h1" size="3xl" centered>
             {agrupacion.nombre}
-          </h1>
+          </SectionTitle>
           <div className="w-24 h-1 bg-accent mx-auto mb-8"></div>
           <p className="text-xl text-textSecondary font-montserrat max-w-4xl mx-auto leading-relaxed">
             {agrupacion.descripcion}
@@ -28,13 +29,13 @@ export default function RioMarQuartetPage() {
         <div className="container mx-auto px-8 md:px-16 max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-textLight font-cinzel uppercase mb-6">
+              <SectionTitle level="h2" size="xl">
                 Nuestra Historia
-              </h2>
+              </SectionTitle>
               <div className="w-16 h-1 bg-accent mb-6"></div>
               <div className="text-textLight font-montserrat leading-relaxed mb-6">
                 {agrupacion.historia.split('. ').map((parrafo, index) => (
-                  <p key={index} className="mb-4">
+                  <p key={`historia-${index}`} className="mb-4">
                     {parrafo}{index < agrupacion.historia.split('. ').length - 1 ? '.' : ''}
                   </p>
                 ))}
@@ -63,10 +64,9 @@ export default function RioMarQuartetPage() {
       <section className="py-16 md:py-20 bg-bgDarkSection">
         <div className="container mx-auto px-8 md:px-16 max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-textLight font-cinzel uppercase mb-4">
+            <SectionTitle level="h2" size="xl" centered withDivider>
               Integrantes
-            </h2>
-            <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
+            </SectionTitle>
             <p className="text-textSecondary text-lg font-montserrat max-w-3xl mx-auto">
               Músicos de gran trayectoria que conforman esta destacada agrupación de cámara.
             </p>
@@ -76,7 +76,7 @@ export default function RioMarQuartetPage() {
             {agrupacion.integrantes
               .sort((a, b) => a.orden - b.orden)
               .map((integrante) => (
-                <div key={integrante.id} className="bg-bgDark rounded-xl p-6 text-center shadow-lg">
+                <Card key={integrante.id} variant="default" size="md" className="text-center shadow-lg">
                   <div className="relative w-32 h-32 mx-auto mb-6">
                     <Image
                       src={integrante.foto}
@@ -92,7 +92,7 @@ export default function RioMarQuartetPage() {
                   <p className="text-accent font-medium font-montserrat uppercase text-sm">
                     {integrante.instrumento}
                   </p>
-                </div>
+                </Card>
               ))}
           </div>
         </div>
@@ -102,17 +102,16 @@ export default function RioMarQuartetPage() {
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-8 md:px-16 max-w-4xl">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-textLight font-cinzel uppercase mb-4">
+            <SectionTitle level="h2" size="xl" centered withDivider>
               Repertorio Destacado
-            </h2>
-            <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
+            </SectionTitle>
             <p className="text-textSecondary text-lg font-montserrat max-w-3xl mx-auto">
               Una selección de nuestro repertorio que abarca desde lo clásico hasta lo contemporáneo.
             </p>
           </div>
           <ul className="grid md:grid-cols-2 gap-x-12 gap-y-6 text-textLight font-montserrat">
             {agrupacion.repertorio.map((obra, index) => (
-              <li key={index} className="border-b border-gray-700/50 pb-3 flex flex-col">
+              <li key={`repertorio-${obra.categoria}-${index}`} className="border-b border-gray-700/50 pb-3 flex flex-col">
                 <span className="font-bold">{obra.categoria}</span>
                 <span className="text-textSecondary">{obra.descripcion}</span>
               </li>
@@ -133,18 +132,20 @@ export default function RioMarQuartetPage() {
               Contáctanos para conocer nuestra disponibilidad y propuesta artística.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
+              <Button 
                 href="/contacto"
-                className="inline-block bg-accent text-textLight px-8 py-3 rounded-lg font-medium hover:bg-primary transition-colors font-montserrat"
+                variant="accent"
+                size="md"
               >
                 Contactar
-              </a>
-              <a 
+              </Button>
+              <Button 
                 href="/eventos"
-                className="inline-block bg-transparent border-2 border-accent text-accent px-8 py-3 rounded-lg font-medium hover:bg-accent hover:text-textLight transition-colors font-montserrat"
+                variant="outline"
+                size="md"
               >
                 Ver Próximas Presentaciones
-              </a>
+              </Button>
             </div>
           </div>
         </div>

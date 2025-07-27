@@ -4,11 +4,10 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import HeroFestival from '../../../components/festival/HeroFestival';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import ArtistGrid from '../../../components/festival/ArtistGrid';
 import SponsorBanner from '../../../components/festival/SponsorBanner';
 import { useFestivalArtists, useSponsors } from '../../../hooks/useCMS';
 import { adaptCMSSponsorToPatrocinador } from '../../../lib/adapters';
+import { Button, SectionTitle } from '../../../components/ui';
 
 export default function Festival2025() {
   const { data: artistas, loading: loadingArtistas } = useFestivalArtists(2025);
@@ -60,10 +59,15 @@ export default function Festival2025() {
       <section className="py-8 sm:py-12 bg-bgDarkSection border-b border-bgDark">
         <div className="container mx-auto px-4 sm:px-8 md:px-16 max-w-6xl">
           <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-textLight font-cinzel uppercase mb-3 sm:mb-4">
+            <SectionTitle
+              level="h2"
+              size="lg"
+              centered
+              withDivider
+              className="mb-3 sm:mb-4"
+            >
               Explora el Festival
-            </h2>
-            <div className="w-12 sm:w-16 h-1 bg-accent mx-auto"></div>
+            </SectionTitle>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -133,10 +137,15 @@ export default function Festival2025() {
       <section className="py-12 sm:py-16 md:py-20">
         <div className="container mx-auto px-4 sm:px-8 md:px-16 max-w-6xl">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-textLight font-cinzel uppercase mb-3 sm:mb-4">
+            <SectionTitle
+              level="h2"
+              size="xl"
+              centered
+              withDivider
+              className="mb-4 sm:mb-6"
+            >
               Artistas Invitados 2025
-            </h2>
-            <div className="w-16 sm:w-24 h-1 bg-accent mx-auto mb-4 sm:mb-6"></div>
+            </SectionTitle>
             <p className="text-textSecondary text-base sm:text-lg font-montserrat max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed">
               Músicos de talla internacional que nos acompañarán en esta edición especial del festival.
             </p>
@@ -176,15 +185,17 @@ export default function Festival2025() {
           </div>
 
           <div className="text-center">
-            <Link 
+            <Button 
               href="/festival/2025/invitados"
-              className="inline-flex items-center gap-2 bg-accent text-textLight px-6 sm:px-8 py-3 rounded-lg font-medium hover:bg-primary transition-colores font-montserrat text-sm sm:text-base active:scale-95 touch-manipulation"
+              variant="accent"
+              size="md"
+              className="inline-flex items-center gap-2 text-sm sm:text-base active:scale-95 touch-manipulation"
             >
               Ver Todos los Artistas Invitados
               <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-            </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -210,12 +221,14 @@ export default function Festival2025() {
                 El festival incluirá conciertos diarios, masterclasses con artistas invitados, 
                 talleres de música de cámara y eventos especiales para toda la familia.
               </p>
-              <Link 
+              <Button 
                 href="/festival/2025/cronograma"
-                className="inline-block bg-accent text-textLight px-6 sm:px-8 py-3 rounded-lg font-medium hover:bg-primary transition-colores font-montserrat text-sm sm:text-base active:scale-95 touch-manipulation"
+                variant="accent"
+                size="md"
+                className="text-sm sm:text-base active:scale-95 touch-manipulation"
               >
                 Ver Cronograma Completo
-              </Link>
+              </Button>
             </div>
             <div className="relative order-1 lg:order-2 h-64">
               <Image 
@@ -288,12 +301,14 @@ export default function Festival2025() {
           </div>
 
           <div className="mt-12 sm:mt-16 text-center">
-            <Link 
+            <Button 
               href="/festival/2025/inscripciones"
-              className="inline-block bg-accent text-textLight px-8 sm:px-10 py-4 rounded-lg font-bold hover:bg-primary transition-colores font-montserrat text-base sm:text-lg active:scale-95 touch-manipulation"
+              variant="accent"
+              size="lg"
+              className="font-bold text-base sm:text-lg active:scale-95 touch-manipulation"
             >
               Inscríbete Ahora en el Festival
-            </Link>
+            </Button>
           </div>
         </div>
       </section>

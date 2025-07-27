@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { Button, SectionTitle } from "../../components/ui";
 
 // Componente para tarjeta de método de donación
 const DonationMethodCard: React.FC<{
@@ -15,36 +16,6 @@ const DonationMethodCard: React.FC<{
   showDetails?: boolean;
   isExpandable?: boolean;
 }> = ({ title, details, icon, actionText, actionUrl, isExternal = false, onClick, showDetails = false, isExpandable = false }) => {
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const fallbackCopyTextToClipboard = (text: string) => {
-    const textArea = document.createElement("textarea");
-    textArea.value = text;
-    
-    // Hacer el textarea invisible
-    textArea.style.top = "0";
-    textArea.style.left = "0";
-    textArea.style.position = "fixed";
-    textArea.style.opacity = "0";
-    
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    
-    try {
-      const successful = document.execCommand('copy');
-      if (successful) {
-        alert('Datos bancarios copiados al portapapeles');
-      } else {
-        alert('No se pudo copiar automáticamente. Selecciona y copia manualmente los datos.');
-      }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
-      alert('No se pudo copiar automáticamente. Selecciona y copia manualmente los datos.');
-    }
-    
-    document.body.removeChild(textArea);
-  };
 
   return (
     <div className="bg-bgDarkSection rounded-xl p-6 hover:shadow-xl transition-all duration-300 border border-bgDark hover:border-accent/30 h-full flex flex-col">
@@ -82,20 +53,23 @@ const DonationMethodCard: React.FC<{
         {/* Solo transferencia bancaria es expandible */}
         {title === "Transferencia Bancaria" ? (
           /* Botón para expandir/colapsar transferencia bancaria */
-          <button 
+          <Button 
             onClick={onClick}
-            className="w-full bg-accent text-textLight px-6 py-3 rounded-lg font-medium hover:bg-primary transition-colors font-montserrat text-center"
+            variant="accent"
+            size="md"
+            className="w-full text-center"
           >
             {actionText}
-          </button>
+          </Button>
         ) : (
           /* Enlaces externos para Mercado Pago y PayPal - siempre directos */
           actionUrl && (
-            <a 
+            <Button 
               href={actionUrl}
-              target={isExternal ? "_blank" : undefined}
-              rel={isExternal ? "noopener noreferrer" : undefined}
-              className="inline-flex items-center justify-center gap-2 w-full bg-accent text-textLight px-6 py-3 rounded-lg font-medium hover:bg-primary transition-colors font-montserrat"
+              variant="accent"
+              size="md"
+              isExternal={isExternal}
+              className="inline-flex items-center justify-center gap-2 w-full"
             >
               {actionText}
               {isExternal && (
@@ -103,7 +77,7 @@ const DonationMethodCard: React.FC<{
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
                 )}
-            </a>
+            </Button>
           )
         )}
       </div>
@@ -124,10 +98,15 @@ const ImpactSection: React.FC = () => {
     <section className="py-16 md:py-20 bg-bgDarkSection">
       <div className="container mx-auto px-8 md:px-16 max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-textLight font-cinzel uppercase mb-4">
+          <SectionTitle 
+            level="h2" 
+            size="xl" 
+            centered 
+            withDivider
+            className="mb-6"
+          >
             El Impacto de Tu Donación
-          </h2>
-          <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
+          </SectionTitle>
           <p className="text-textSecondary text-lg font-montserrat max-w-3xl mx-auto">
             Cada contribución que recibimos se convierte directamente en oportunidades 
             de crecimiento y formación musical para jóvenes talentosos.
@@ -275,10 +254,15 @@ const Apoyanos: React.FC = () => {
       {/* Introducción */}
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-8 md:px-16 max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-textLight font-cinzel uppercase mb-6">
+          <SectionTitle 
+            level="h2" 
+            size="xl" 
+            centered 
+            withDivider
+            className="mb-8"
+          >
             ¿Por Qué Tu Donación Importa?
-          </h2>
-          <div className="w-24 h-1 bg-accent mx-auto mb-8"></div>
+          </SectionTitle>
           <p className="text-textSecondary text-lg font-montserrat leading-relaxed mb-8">
             En la Fundación Rubato creemos que la música tiene el poder de transformar comunidades 
             enteras. Tu contribución no solo financia lecciones de música; invierte en el futuro 
@@ -299,10 +283,15 @@ const Apoyanos: React.FC = () => {
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-8 md:px-16 max-w-5xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-textLight font-cinzel uppercase mb-4">
+            <SectionTitle 
+              level="h2" 
+              size="xl" 
+              centered 
+              withDivider
+              className="mb-6"
+            >
               ¿Cómo Puedo Donar?
-            </h2>
-            <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
+            </SectionTitle>
             <p className="text-textSecondary text-lg font-montserrat max-w-3xl mx-auto">
               Hemos habilitado múltiples canales para que tu donación sea fácil y segura, 
               desde cualquier lugar del mundo.
@@ -375,15 +364,17 @@ const Apoyanos: React.FC = () => {
                   <p className="text-textLight font-montserrat">Marketing y comunicaciones</p>
                 </div>
               </div>
-              <a 
+              <Button 
                 href="/contacto"
-                className="inline-flex items-center gap-2 bg-accent text-textLight px-8 py-4 rounded-lg font-medium text-lg hover:bg-primary transition-colors font-montserrat"
+                variant="accent"
+                size="lg"
+                className="inline-flex items-center gap-2 text-lg"
               >
                 Quiero ser Voluntario
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </a>
+              </Button>
             </div>
             <div className="relative h-96">
               <Image 

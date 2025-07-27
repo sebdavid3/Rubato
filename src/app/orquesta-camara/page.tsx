@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
 import { orquestaCamara } from '../../data/agrupaciones';
 
 export default function OrquestaCamaraPage() {
@@ -256,12 +257,12 @@ export default function OrquestaCamaraPage() {
               >
                 Contactar
               </a>
-              <a 
+              <Link 
                 href="/eventos"
                 className="inline-block bg-transparent border-2 border-accent text-accent px-8 py-3 rounded-lg font-medium hover:bg-accent hover:text-textLight transition-colors font-montserrat"
               >
                 Ver Próximas Presentaciones
-              </a>
+              </Link>
             </div>
           </div>
         </div>
